@@ -36,6 +36,8 @@ PROJECT_APPS = [
     'crispy_bootstrap5',
     'homeBuild.accounts.apps.AccountsConfig',
     'homeBuild.common.apps.CommonConfig',
+    'homeBuild.projects.apps.ProjectsConfig',
+    'homeBuild.photos.apps.PhotosConfig',
 ]
 
 INSTALLED_APPS = [
