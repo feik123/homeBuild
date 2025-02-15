@@ -1,0 +1,49 @@
+{% extends 'common/base.html' %}
+{% load placeholder_filter %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="auth-container">
+
+
+        <!-- Registration Form -->
+        <div id="register-form" class="hidden">
+            <h2>Register</h2>
+            <form method="post">
+                {% csrf_token %}
+{#                {{ form|crispy }}#}
+
+                {{ form.email|placeholder:"Email" }}
+                {{ form.email.errors }}
+
+                {{ form.password1|placeholder:"Password" }}
+                {{ form.password1.errors }}
+
+                {{ form.password2|placeholder:"Confirm Password" }}
+                {{ form.password2.errors }}
+
+                <!-- Register Button -->
+                <button type="submit">Register</button>
+            </form>
+            <div class="toggle-forms">
+                <a href="#" onclick="toggleForm('login-form')">Back to Login</a>
+            </div>
+        </div>
+
+{#        <!-- Forgot Password Form -->#}
+{#        <div id="forgot-password-form" class="hidden">#}
+{#            <h2>Forgot Password</h2>#}
+{#            <form action="#" method="post">#}
+{#                <label for="forgot-email">Email:</label>#}
+{#                <input type="email" id="forgot-email" name="email" required>#}
+{##}
+{#                <input type="submit" value="Reset Password">#}
+{#            </form>#}
+{#            <div class="toggle-forms">#}
+{#                <a href="#" onclick="toggleForm('login-form')">Back to Login</a>#}
+{#            </div>#}
+{#        </div>#}
+    </div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="auth-container">
+        <h2>Edit Profile</h2>
+
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <p> {{ field.errors }} </p>
+                <div>
+                    <label>{{ field.label }}
+                    </label> {{ field }}
+                </div>
+                <br>
+            {% endfor %}
+            <!-- Edit Profile Button -->
+            <button class="edit-btn" type="submit">Edit</button>
+
+
+        </form>
+    </div>
+{% endblock %}
