@@ -9,6 +9,6 @@ class Project(models.Model):
         to=UserModel,
         on_delete=models.CASCADE,
     )
-    address = models.CharField(max_length=200, null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
+    address = models.CharField(max_length=100, null=True, blank=True)
+    description = models.CharField(max_length=100,null=True, blank=True)
 

@@ -1,5 +1,4 @@
 from django.contrib.auth import get_user_model
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 UserModel = get_user_model()
@@ -56,29 +55,30 @@ class HomeOwnerProfile(Profile):
         return f"Homeowner profile for {self.user}"
 
 
-class JobCategory(models.TextChoices):
-    RENOVATION = 'renovation', 'Renovation'
-    MAINTENANCE = 'maintenance', 'Maintenance'
-    LANDSCAPING = 'landscaping', 'Landscaping'
-    ELECTRICAL = 'electrical', 'Electrical'
-    PLUMBING = 'plumbing', 'Plumbing'
-    CLEANING = 'cleaning', 'Cleaning'
-    OTHER = 'other', 'Other'
+class JobCategory(models.Model):
+    name = models.CharField(
+        max_length=30,
+        choices=(
+            ('renovation', 'Renovation'),
+            ('maintenance', 'Maintenance'),
+            ('landscaping', 'Landscaping'),
+            ('electrical', 'Electrical'),
+            ('plumbing', 'Plumbing'),
+            ('cleaning', 'Cleaning'),
+            ('other', 'Other'),
+        ),
+        default='other'
+    )
+
+    def __str__(self):
+        return self.name
+
 
 
 class ContractorProfile(Profile):
-    available_status = models.BooleanField(
-        default=True,
-    )
 
-    job_categories = ArrayField(
-        models.CharField(
-            max_length=30,
-            choices=JobCategory.choices,
-        ),
-        blank=True,
-        default=JobCategory,
-    )
+
+    job_categories = models.ManyToManyField(JobCategory, blank=True)
 
     experience = models.SmallIntegerField(
         blank=True,

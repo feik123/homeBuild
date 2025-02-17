@@ -1,0 +1,48 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div class="profile-details">
+    <!-- User Profile Info -->
+    <div class="profile-info">
+        <h1>{{ object.profile.first_name }} {{object.profile.last_name  }}'s Profile</h1>
+        <div class="experience">
+            <h2>Experience</h2>
+            <p>{{ object.profile.experience }}</p>
+        </div>
+        
+        <div class="expertise">
+            <h2>Areas of Expertise</h2>
+            <ul>
+                {% for category in object.profile.job_categories.all %}
+                    <li>{{ category.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- User's Projects -->
+    <div class="projects">
+        <h2>Finished Projects</h2>
+
+        {% if user.projects.all %}
+            <div class="project-list">
+                {% for project in object.profile.projects.all %}
+                    <div class="project">
+                        <div class="project-image">
+                            <img src="{{ project.photo }}" alt="Project Image">
+                        </div>
+                        <div class="project-details">
+                            <p>{{ project.description }}</p>
+                            <p><strong>Location:</strong> {{ project.address }}</p>
+                            <a href="{% url 'project_details' project.id %}" class="view-project-btn">View Project</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No projects to display.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
