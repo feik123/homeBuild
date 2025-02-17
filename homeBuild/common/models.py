@@ -26,7 +26,7 @@ class Like(models.Model):
         on_delete=models.CASCADE,
     )
 
-    project = models.ForeignKey(
+    to_project = models.ForeignKey(
         to=Project,
         on_delete=models.CASCADE,
     )
