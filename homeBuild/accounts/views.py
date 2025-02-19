@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView
 
 from homeBuild.accounts.forms import AppUserCreationForm, ProfileEditForm
-from homeBuild.accounts.models import HomeOwnerProfile
+from homeBuild.accounts.models import HomeOwnerProfile, ContractorProfile
 from homeBuild.projects.models import Project
 
 UserModel = get_user_model()
@@ -29,7 +29,6 @@ class UserRegisterView(CreateView):
         return response
 
 
-
 class ProfileDetailView(DetailView):
     model = UserModel
     template_name = 'accounts/profile-details.html'
@@ -37,11 +36,15 @@ class ProfileDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        try:
-            profile = self.object.profile  # Access the related profile
-        except UserModel.profile.RelatedObjectDoesNotExist:
-            profile = None  # If no profile exists, set it to None or handle accordingly
+        user = self.object  # The UserModel instance
 
+        # Try to get the HomeOwnerProfile or ContractorProfile
+        try:
+            profile = ContractorProfile.objects.get(user=user)
+        except ContractorProfile.DoesNotExist:
+            profile = None  # Handle the case where no profile exists
+
+        # Fetch the projects related to the profile
         if profile:
             projects = Project.objects.filter(profile=profile)
         else:
@@ -51,6 +54,7 @@ class ProfileDetailView(DetailView):
         context['profile'] = profile
 
         return context
+
 
 class ProfileEditView(UpdateView):
     model = HomeOwnerProfile

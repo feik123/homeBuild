@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from homeBuild.accounts.models import ContractorProfile
+
 UserModel = get_user_model()
 
 class Project(models.Model):
@@ -11,4 +13,8 @@ class Project(models.Model):
     )
     address = models.CharField(max_length=100, null=True, blank=True)
     description = models.CharField(max_length=100,null=True, blank=True)
+    profile = models.ForeignKey(
+        ContractorProfile,
+        on_delete=models.CASCADE
+    )
 

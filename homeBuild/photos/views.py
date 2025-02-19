@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from homeBuild.photos.forms import PhotoAddForm
 from homeBuild.photos.models import Photo
@@ -28,3 +28,5 @@ class PhotoAddPage(LoginRequiredMixin ,CreateView):
         photo.project = project
 
         return super().form_valid(form)
+
+

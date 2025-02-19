@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from homeBuild.projects.forms import ProjectAddForm
 from homeBuild.projects.models import Project
@@ -29,3 +29,9 @@ class ProjectAdd(CreateView, LoginRequiredMixin):
                 'pk': self.request.user.pk
             }
         )
+
+class ProjectDetails(DetailView):
+    model = Project
+    template_name = 'projects/project-details.html'
+    context_object_name = 'project'
+
