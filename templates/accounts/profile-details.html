@@ -1,22 +1,25 @@
 {% extends 'common/base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="profile-details">
-    <!-- User Profile Info -->
+    <!-- User Profile Info (Card Style) -->
     <div class="profile-info">
-        <h1>{{ profile.first_name }} {{profile.last_name  }}'s Profile</h1>
-        <div class="experience">
-            <h2>Experience</h2>
-            <p>{{ profile.experience }}</p>
-        </div>
-        
-        <div class="expertise">
-            <h2>Areas of Expertise</h2>
-            <ul>
-                {% for category in profile.job_categories.all %}
-                    <li>{{ category.name }}</li>
-                {% endfor %}
-            </ul>
+        <div class="profile-card">
+            <h1>{{ profile.first_name }} {{ profile.last_name }}'s Profile</h1>
+            <div class="experience">
+                <h2>Experience</h2>
+                <p>{{ profile.experience }}</p>
+            </div>
+            
+            <div class="expertise">
+                <h2>Areas of Expertise</h2>
+                <ul>
+                    {% for category in profile.job_categories.all %}
+                        <li>{{ category.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 
@@ -28,13 +31,38 @@
             <div class="project-list">
                 {% for project in projects %}
                     <div class="project">
+                        
+                        <!-- Project Image -->
                         <div class="project-image">
                             <img src="{{ project.photo }}" alt="Project Image">
                         </div>
+                        
+                        <!-- Like Button -->
+                        <span class="heart">
+                            <a href="{% url 'likes' project.pk %}">
+                                {% if project.has_liked %}
+                                    <i class="fa-solid fa-thumbs-up" style="color: #ed4040;"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-thumbs-up"></i>
+                                {% endif %}
+                            </a>
+                        </span>
+                        
+                        <!-- Project Details -->
                         <div class="project-details">
                             <p>{{ project.description }}</p>
                             <p><strong>Location:</strong> {{ project.address }}</p>
+                            
                             <a href="{% url 'project-details' project.id %}" class="view-project-btn">View Project</a>
+
+                            <!-- Comment Box inside Card -->
+                            <div class="addComments">
+                                <form method="post" action="{% url 'comments' project.id %}">
+                                    {% csrf_token %}
+                                    {{ comment_form }}
+                                    <button type="submit">Post</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 
@@ -12,7 +13,7 @@ UserModel = get_user_model()
 class HomePageView(TemplateView):
     template_name = 'common/index.html'
 
-
+@login_required
 def likes_functionality(request, project_id: int):
     liked_object = Like.objects.filter(
         user=request.user,
@@ -27,6 +28,7 @@ def likes_functionality(request, project_id: int):
 
     return redirect(request.META['HTTP_REFERER'] + f'#{project_id}')
 
+@login_required
 def comments_functionality(request, project_id: int):
     if request.POST:
         project = Project.objects.get(pk=project_id)
@@ -38,4 +40,4 @@ def comments_functionality(request, project_id: int):
             comment.user = request.user
             comment.save()
 
-        return redirect(request.META['HTTP_REFERER'] + f'#{project_id}')
+    return redirect(request.META['HTTP_REFERER'] + f'#{project_id}')
