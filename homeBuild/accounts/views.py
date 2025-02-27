@@ -6,6 +6,7 @@ from django.views.generic import CreateView, UpdateView, DetailView
 from homeBuild.accounts.forms import AppUserCreationForm, ProfileEditForm
 from homeBuild.accounts.models import HomeOwnerProfile, ContractorProfile
 from homeBuild.common.forms import CommentForm
+from homeBuild.common.models import Like
 from homeBuild.projects.models import Project
 
 UserModel = get_user_model()
@@ -48,6 +49,10 @@ class ProfileDetailView(DetailView):
             projects = Project.objects.filter(profile=profile)
         else:
             projects = []
+
+        for project in projects:
+            project.has_liked = Like.objects.filter(user=self.request.user, to_project=project).exists()
+            project.likes_count = Like.objects.filter(to_project=project).count()
 
         context['projects'] = projects
         context['profile'] = profile

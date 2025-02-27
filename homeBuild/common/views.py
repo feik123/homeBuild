@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
 
 from homeBuild.common.forms import CommentForm
@@ -25,6 +25,7 @@ def likes_functionality(request, project_id: int):
     else:
         like = Like(user=request.user, to_project_id=project_id)
         like.save()
+
 
     return redirect(request.META['HTTP_REFERER'] + f'#{project_id}')
 

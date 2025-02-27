@@ -41,7 +41,8 @@
                         <span class="heart">
                             <a href="{% url 'likes' project.pk %}">
                                 {% if project.has_liked %}
-                                    <i class="fa-solid fa-thumbs-up" style="color: #ed4040;"></i>
+                                    <i class="fa-solid fa-thumbs-up" style="color: #408eed;"></i>
+                                    <p>likes: {{ project.likes_count }}</p>
                                 {% else %}
                                     <i class="fa-regular fa-thumbs-up"></i>
                                 {% endif %}
