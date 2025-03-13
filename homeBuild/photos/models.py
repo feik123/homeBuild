@@ -21,8 +21,18 @@ class Photo(models.Model):
     project = models.ForeignKey(
         to=Project,
         on_delete=models.CASCADE,
-        related_name='photos',
+        related_name='project_photos',
+        null=True,
+        blank=True
+    )
+
+    job = models.ForeignKey(
+        'common.Job',
+        on_delete=models.CASCADE,
+        related_name='job_photos',
+        null=True,
+        blank=True
     )
 
     def __str__(self):
-        return f"Photo for {self.project.id} by {self.user}"
+        return f"Photo by {self.user} for {'Job' if self.job else 'Project'} {self.job.id if self.job else self.project.id} "
