@@ -11,6 +11,11 @@
         {% for photo in project.photos.all %}
         <img src="{{ photo.photo }}" alt="Additional Photo">
         {% endfor %}
+        {% for comment in project.comment_set.all %}
+            <p>{{ comment.comment }}</p>
+            <p>{{ comment.text }}</p>
+            
+        {% endfor %}
     </div>
 
 

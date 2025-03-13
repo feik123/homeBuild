@@ -10,3 +10,4 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(attrs={'placeholder': 'Add comment...'}),
         }
+

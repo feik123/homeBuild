@@ -32,26 +32,24 @@ class UserRegisterView(CreateView):
 class ProfileDetailView(DetailView):
     model = UserModel
     template_name = 'accounts/profile-details.html'
+    context_object_name = 'user_profile'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        user = self.object  # The UserModel instance
+        user = self.object  # The user whose profile is being viewed
 
-        # Try to get the HomeOwnerProfile or ContractorProfile
-        try:
-            profile = ContractorProfile.objects.get(user=user)
-        except ContractorProfile.DoesNotExist:
-            profile = None  # Handle the case where no profile exists
+        # get ContractorProfile
+        profile = ContractorProfile.objects.filter(user=user).first()
+
 
         # Fetch the projects related to the profile
-        if profile:
-            projects = Project.objects.filter(profile=profile)
-        else:
-            projects = []
+        projects = Project.objects.filter(profile=profile) if profile else []
+
+        current_user = self.request.user if self.request.user.is_authenticated else None
 
         for project in projects:
-            project.has_liked = Like.objects.filter(user=self.request.user, to_project=project).exists()
+            project.has_liked = Like.objects.filter(user=current_user, to_project=project).exists()
             project.likes_count = Like.objects.filter(to_project=project).count()
 
         context['projects'] = projects

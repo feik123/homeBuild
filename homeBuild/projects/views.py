@@ -35,3 +35,4 @@ class ProjectDetails(DetailView):
     template_name = 'projects/project-details.html'
     context_object_name = 'project'
 
+

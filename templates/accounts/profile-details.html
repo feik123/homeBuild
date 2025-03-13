@@ -30,8 +30,10 @@
         {% if projects %}
             <div class="project-list">
                 {% for project in projects %}
+
                     <div class="project">
-                        
+                    
+
                         <!-- Project Image -->
                         <div class="project-image">
                             <img src="{{ project.photo }}" alt="Project Image">
@@ -40,12 +42,13 @@
                         <!-- Like Button -->
                         <span class="heart">
                             <a href="{% url 'likes' project.pk %}">
+
                                 {% if project.has_liked %}
                                     <i class="fa-solid fa-thumbs-up" style="color: #408eed;"></i>
-                                    <p>likes: {{ project.likes_count }}</p>
                                 {% else %}
                                     <i class="fa-regular fa-thumbs-up"></i>
                                 {% endif %}
+                                <p>likes: {{ project.likes_count }}</p>
                             </a>
                         </span>
                         

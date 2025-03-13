@@ -106,3 +106,48 @@
 .view-project-btn:hover {
     background-color: #0056b3;
 }
+
+.addComments {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.addComments button {
+    position: absolute;
+    right: 30px;
+    color: #1d92ffcb;
+    font-weight: 500;
+    font-size: 15px;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.addComments .reaction {
+    position: relative;
+    font-size: 1.3rem;
+    margin-right: 10px;
+    color: rgb(88, 88, 88);
+}
+.addComments form {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+textarea {
+    position: relative;
+    left: 10px;
+    width: 85%;
+    resize: vertical;
+    overflow: hidden;
+    height: 45px;
+    border: #9fcdff solid 1px;
+    outline: #abdde5 solid 1px;
+    font-weight: 300;
+    font-size: 14px;
+    color: #262626;
+    background: none;
+}
