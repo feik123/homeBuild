@@ -1,7 +1,10 @@
+from lib2to3.fixes.fix_input import context
+
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DetailView
+from django.views.generic import CreateView, UpdateView, DetailView, TemplateView
 
 from homeBuild.accounts.forms import AppUserCreationForm, ProfileEditForm
 from homeBuild.accounts.models import HomeOwnerProfile, ContractorProfile
@@ -71,3 +74,29 @@ class ProfileEditView(UpdateView):
                 'pk': self.object.pk,
             }
         )
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'common/navigation.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        try:
+            homeowner_profile = HomeOwnerProfile.objects.get(user=self.request.user)
+            profile_type = 'homeowner'
+        except HomeOwnerProfile.DoesNotExist:
+            homeowner_profile = None
+            profile_type = None
+
+        try:
+            contractor_profile = ContractorProfile.objects.get(user=self.request.user)
+            profile_type = 'contractor'
+        except ContractorProfile.DoesNotExist:
+            contractor_profile = None
+
+
+        context['profile_type'] = profile_type
+        context['homeowner_profile'] = homeowner_profile
+        context['contractor_profile'] = contractor_profile
+
+        return context
