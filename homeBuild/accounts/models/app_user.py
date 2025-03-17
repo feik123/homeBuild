@@ -18,6 +18,12 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         default=False
     )
 
+    profile_type = models.CharField(
+        max_length=20,
+        choices=[('homeowner', 'Homeowner'), ('contractor', 'Contractor')],
+        default='homeowner'
+    )
+
     date_joined = models.DateField(
         auto_now_add=True,
     )
