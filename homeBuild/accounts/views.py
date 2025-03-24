@@ -74,29 +74,3 @@ class ProfileEditView(UpdateView):
                 'pk': self.object.pk,
             }
         )
-
-class ProfileView(LoginRequiredMixin, TemplateView):
-    template_name = 'common/navigation.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        try:
-            homeowner_profile = HomeOwnerProfile.objects.get(user=self.request.user)
-            profile_type = 'homeowner'
-        except HomeOwnerProfile.DoesNotExist:
-            homeowner_profile = None
-            profile_type = None
-
-        try:
-            contractor_profile = ContractorProfile.objects.get(user=self.request.user)
-            profile_type = 'contractor'
-        except ContractorProfile.DoesNotExist:
-            contractor_profile = None
-
-
-        context['profile_type'] = profile_type
-        context['homeowner_profile'] = homeowner_profile
-        context['contractor_profile'] = contractor_profile
-
-        return context
