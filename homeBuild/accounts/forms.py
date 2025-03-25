@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
-from homeBuild.accounts.models import Profile
+from homeBuild.accounts.models import Profile, HomeOwnerProfile, ContractorProfile
 
 UserModel = get_user_model()
 
@@ -17,7 +17,12 @@ class AppUserCreationForm(UserCreationForm):
         fields = ('email',)
 
 
-class ProfileEditForm(forms.ModelForm):
+class HomeOwnerProfileEditForm(forms.ModelForm):
     class Meta:
-        model = Profile
+        model = HomeOwnerProfile
+        exclude = ('user',)
+
+class ContractorProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = ContractorProfile
         exclude = ('user',)
