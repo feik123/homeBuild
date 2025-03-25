@@ -83,6 +83,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'homeBuild.context_processors.user_authenticated',
+                'homeBuild.context_processors.profile_info'
             ],
         },
     },
