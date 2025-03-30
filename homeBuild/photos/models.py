@@ -1,9 +1,11 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from homeBuild.jobs.models import Job
 from homeBuild.projects.models import Project
 
 UserModel = get_user_model()
+
 
 class Photo(models.Model):
     photo = models.ImageField(upload_to='photos/')
@@ -27,7 +29,7 @@ class Photo(models.Model):
     )
 
     job = models.ForeignKey(
-        'common.Job',
+        to='jobs.Job',
         on_delete=models.CASCADE,
         related_name='job_photos',
         null=True,

@@ -43,6 +43,7 @@ PROJECT_APPS = [
     'homeBuild.common.apps.CommonConfig',
     'homeBuild.projects.apps.ProjectsConfig',
     'homeBuild.photos.apps.PhotosConfig',
+    'homeBuild.jobs.apps.JobsConfig',
 ]
 
 INSTALLED_APPS = [
@@ -85,6 +86,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'homeBuild.context_processors.user_authenticated',
                 'homeBuild.context_processors.profile_info'
+
             ],
         },
     },
