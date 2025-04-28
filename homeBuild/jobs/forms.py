@@ -8,6 +8,11 @@ class JobBaseForm(forms.ModelForm):
         model = Job
         exclude = ['id']
 
+class JobAddForm(JobBaseForm):
+    class Meta:
+        model = Job
+        exclude = ['id', 'date_of_publication']
+
 class JobEditForm(JobBaseForm):
     pass
 

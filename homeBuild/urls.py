@@ -12,6 +12,7 @@ urlpatterns = [
     path('accounts/', include('homeBuild.accounts.urls')),
     path('projects/', include('homeBuild.projects.urls')),
     path('photos/', include('homeBuild.photos.urls')),
+    path('jobs/', include('homeBuild.jobs.urls')),
 ]
 
 if settings.DEBUG:

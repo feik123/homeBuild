@@ -24,13 +24,20 @@ class Job(models.Model):
         blank=True
     )
     location = models.CharField(max_length=255)  # ToDo Geolocation
-    photo = models.ForeignKey(
-        to=Photo,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
-    )
+
     date_of_publication = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
+
+class JobPhoto(models.Model):
+    job = models.ForeignKey(
+        to=Job,
+        on_delete=models.CASCADE,
+
+        related_name='photos'
+    )
+    image = models.ImageField(upload_to='images')
+
+    def __str__(self):
+        return f"Photo for job: {self.job.title}"

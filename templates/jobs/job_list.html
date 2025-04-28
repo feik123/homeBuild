@@ -1,0 +1,10 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <h2>All Jobs</h2>
+    <ul>
+        {% for job in jobs %}
+            <li>{{ job.title }} (Posted by {{ homeowner.first_name }}{{ homeowner.last_name }})</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
