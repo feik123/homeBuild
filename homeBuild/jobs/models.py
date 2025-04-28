@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from homeBuild.accounts.models import JobCategory
+from homeBuild.photos.models import Photo
 
 # Create your models here.
 
@@ -23,7 +24,12 @@ class Job(models.Model):
         blank=True
     )
     location = models.CharField(max_length=255)  # ToDo Geolocation
-
+    photo = models.ForeignKey(
+        to=Photo,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
     date_of_publication = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

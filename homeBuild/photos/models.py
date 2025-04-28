@@ -1,8 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from homeBuild.jobs.models import Job
-from homeBuild.projects.models import Project
 
 UserModel = get_user_model()
 
@@ -20,21 +18,6 @@ class Photo(models.Model):
         on_delete=models.CASCADE,
     )
 
-    project = models.ForeignKey(
-        to=Project,
-        on_delete=models.CASCADE,
-        related_name='project_photos',
-        null=True,
-        blank=True
-    )
-
-    job = models.ForeignKey(
-        to='jobs.Job',
-        on_delete=models.CASCADE,
-        related_name='job_photos',
-        null=True,
-        blank=True
-    )
 
     def __str__(self):
-        return f"Photo by {self.user} for {'Job' if self.job else 'Project'} {self.job.id if self.job else self.project.id} "
+        return f"Photo by {self.user}"

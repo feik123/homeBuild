@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 
-from homeBuild.accounts.models import Profile, HomeOwnerProfile, ContractorProfile
+from homeBuild.accounts.models import HomeOwnerProfile, ContractorProfile, JobCategory
 
 UserModel = get_user_model()
 
@@ -23,6 +23,14 @@ class HomeOwnerProfileEditForm(forms.ModelForm):
         exclude = ('user',)
 
 class ContractorProfileEditForm(forms.ModelForm):
+
+    job_categories = forms.ModelMultipleChoiceField(
+        queryset=JobCategory.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+    )
     class Meta:
         model = ContractorProfile
         exclude = ('user',)
+
+

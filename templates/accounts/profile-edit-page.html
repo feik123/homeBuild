@@ -6,6 +6,7 @@
 
         <form method="post">
             {% csrf_token %}
+            
             {% for field in form %}
                 <p> {{ field.errors }} </p>
                 <div>
@@ -14,6 +15,7 @@
                 </div>
                 <br>
             {% endfor %}
+            
             <!-- Edit Profile Button -->
             <button class="edit-btn" type="submit">Edit</button>
 
