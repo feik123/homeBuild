@@ -12,7 +12,7 @@
             <a class="nav-link" href="../about.html"> Job categories</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../project.html">Post job</a>
+            <a class="nav-link" href="{% url 'job-create' %}">Post job</a>
         </li>
 
         {% if not user_authenticated %}

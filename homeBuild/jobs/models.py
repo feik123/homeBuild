@@ -37,7 +37,7 @@ class JobPhoto(models.Model):
 
         related_name='photos'
     )
-    image = models.ImageField(upload_to='images')
+    image = models.ImageField(upload_to='job_photos/')
 
     def __str__(self):
         return f"Photo for job: {self.job.title}"
