@@ -42,14 +42,14 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Post a job</a></li>
+                            <li><a class="dropdown-item" href="{% url 'job-create' %}">Post a job</a></li>
                         {% elif profile_type == 'homeowner' %}
                             <li><a class="dropdown-item" href="{% url 'profile-edit' user.pk %}">Edit profile</a></li>
                             <li><a class="dropdown-item" href="#">My jobs</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Post a job</a></li>
+                            <li><a class="dropdown-item" href="{% url 'job-create' %}">Post a job</a></li>
                         {% else %}
                             <p>Profile type is undefined.</p>
                         {% endif %}

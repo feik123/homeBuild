@@ -2,12 +2,13 @@ from django.http import HttpResponseForbidden
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import FormView, CreateView
 
 from homeBuild.jobs.forms import JobAddForm
 from homeBuild.jobs.models import Job, JobPhoto
 
 
-class CreateJobView(View):
+class CreateJobView(CreateView):
     model = Job
     form_class = JobAddForm
     template_name = 'jobs/create.html'
@@ -28,7 +29,7 @@ class CreateJobView(View):
         form.instance.homeowner = self.request.user
         response =  super().form_valid(form)
 
-        for file in self.request.FILES.get('files'):
+        for file in self.request.FILES.getlist('images'):
             JobPhoto.objects.create(job=self.object, image=file)
 
         return response
