@@ -4,7 +4,15 @@
     <h2>All Jobs</h2>
     <ul>
         {% for job in jobs %}
-            <li>{{ job.title }} (Posted by {{ homeowner.first_name }}{{ homeowner.last_name }})</li>
+            <li>{{ job.title }}
+            {% if job.homeowner.homeownerprofile %}
+                {% with profile=job.homeowner.homeownerprofile %}
+                    {% if profile.first_name or profile.last_name %}
+                        (Posted by         {% if profile.first_name %}{{ profile.first_name }}{% endif %}
+                        {% if profile.last_name %}{{ profile.last_name }}{% endif %})
+                    {% endif %}
+                {% endwith %}
+            {% endif %}
         {% endfor %}
     </ul>
 {% endblock %}

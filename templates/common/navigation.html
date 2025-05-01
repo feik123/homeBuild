@@ -9,7 +9,7 @@
             <a class="nav-link" href="../service.html">How it works</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../about.html"> Job categories</a>
+            <a class="nav-link" href="{% url 'job-list' %}">Jobs</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="{% url 'job-create' %}">Post job</a>
@@ -38,7 +38,7 @@
                     {% if profile_type %}
                         {% if profile_type == 'contractor' %}
                             <li><a class="dropdown-item" href="{% url 'profile-edit' user.pk %}">Edit profile</a></li>
-                            <li><a class="dropdown-item" href="#">Find jobs</a></li>
+                            <li><a class="dropdown-item" href="{% url 'job-list' %}">Find jobs</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

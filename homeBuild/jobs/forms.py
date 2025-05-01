@@ -11,7 +11,6 @@ class JobBaseForm(forms.ModelForm):
 
 class JobAddForm(JobBaseForm):
 
-
     class Meta:
         model = Job
         exclude = ['id', 'homeowner', 'date_of_publication']
@@ -22,4 +21,7 @@ class JobEditForm(JobBaseForm):
 
 
 class JobDeleteForm(JobBaseForm):
+    pass
+
+class JobsListForm(JobBaseForm):
     pass

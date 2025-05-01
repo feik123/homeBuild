@@ -1,8 +1,6 @@
 from django.http import HttpResponseForbidden
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views import View
-from django.views.generic import FormView, CreateView
+from django.views.generic import ListView, CreateView
 
 from homeBuild.jobs.forms import JobAddForm
 from homeBuild.jobs.models import Job, JobPhoto
@@ -27,14 +25,21 @@ class CreateJobView(CreateView):
 
     def form_valid(self, form):
         form.instance.homeowner = self.request.user
-        response =  super().form_valid(form)
+        response = super().form_valid(form)
 
         for file in self.request.FILES.getlist('images'):
             JobPhoto.objects.create(job=self.object, image=file)
 
         return response
 
-class JobListView(View):
+class JobListView(ListView):
     model = Job
     template_name = 'jobs/job_list.html'
     context_object_name = 'jobs'
+    paginate_by = 8
+    ordering = ['-date_of_publication']
+
+    def get_queryset(self):
+        queryset = Job.objects.select_related('homeowner__homeownerprofile').order_by('-date_of_publication')
+        print(queryset.query)
+        return  queryset
