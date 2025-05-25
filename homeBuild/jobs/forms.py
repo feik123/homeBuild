@@ -8,13 +8,16 @@ class JobBaseForm(forms.ModelForm):
         model = Job
         exclude = ['id']
 
-
-class JobAddForm(JobBaseForm):
-
+class JobAddForm(forms.ModelForm):
     class Meta:
         model = Job
-        exclude = ['id', 'homeowner', 'date_of_publication']
-
+        fields = ['title', 'description', 'job_category', 'location']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'job_category': forms.Select(attrs={'class': 'form-control'}),
+            'location': forms.HiddenInput()
+        }
 
 class JobEditForm(JobBaseForm):
     pass
@@ -25,3 +28,4 @@ class JobDeleteForm(JobBaseForm):
 
 class JobsListForm(JobBaseForm):
     pass
+

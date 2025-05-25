@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from homeBuild.common.utils import geocode_address
+
 UserModel = get_user_model()
 
 
@@ -39,11 +41,20 @@ class Profile(models.Model):
         null=True,
     )
 
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+
     phone_number = models.CharField(
         max_length=15,
         blank=True,
         null=True,
     )
+
+    def save(self, *args, **kwargs):
+        if self.address and (not self.latitude or not self.longitude):
+            self.latitude, self.longitude = geocode_address(self.address)
+
+        super().save(*args, **kwargs)
 
     class Meta:
         abstract = True

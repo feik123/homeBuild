@@ -10,7 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+import json
+from email.policy import default
 from pathlib import Path
+from decouple import config, Config
+
 
 from django.urls import reverse_lazy
 
@@ -22,18 +26,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kdx!9)81+8)*!=fv#if95j%0-$sh6vja0amf7yoic)$w%3kdli'
+SECRET_KEY = config('MY_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('MY_DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = [
-    "localhost",
-]
+ALLOWED_HOSTS = json.loads(config(
+    'ALLOWED_HOSTS',
+))
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://127.0.0.1",
-]
+CSRF_TRUSTED_ORIGINS=json.loads(config(
+    'CSRF_TRUSTED_ORIGINS',
+))
 
 # Application definition
 PROJECT_APPS = [
@@ -44,6 +48,7 @@ PROJECT_APPS = [
     'homeBuild.projects.apps.ProjectsConfig',
     'homeBuild.photos.apps.PhotosConfig',
     'homeBuild.jobs.apps.JobsConfig',
+    'rest_framework'
 ]
 
 INSTALLED_APPS = [
@@ -100,12 +105,12 @@ WSGI_APPLICATION = 'homeBuild.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "home_build_db",
-        "USER": "postgres",
-        "PASSWORD": "postgres",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "ENGINE": config('DB_ENGINE', default='django.db.backends.postgresql'),
+        "NAME": config('DB_NAME'),
+        "USER": config('DB_USER'),
+        "PASSWORD": config('DB_PASSWORD'),
+        "HOST": config('DB_HOST'),
+        "PORT": config('DB_PORT'),
     }
 }
 
@@ -144,9 +149,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR / 'static'),
+    os.path.join(BASE_DIR, 'static')
 ]
 
 MEDIA_URL = 'media/'
@@ -163,3 +168,5 @@ USERNAME_FIELD = 'email' #NOT SURE IF IT IS HERE
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 LOGIN_URL = reverse_lazy('login')
+
+OPENCAGE_API_KEY = config('OPENCAGE_API_KEY')

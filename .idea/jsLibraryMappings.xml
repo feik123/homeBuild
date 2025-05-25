@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{@popperjs/core, OwlCarousel2, b22b1b9aa3, jquery-3.6.0, owlcarousel2-filter, popper.js}" />
+    <file url="file://$PROJECT_DIR$" libraries="{@popperjs/core, OwlCarousel2, b22b1b9aa3, jquery-3.6.0, leaflet, leaflet-control-geocoder, owlcarousel2-filter, popper.js}" />
   </component>
 </project>

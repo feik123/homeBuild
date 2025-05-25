@@ -37,94 +37,29 @@
     <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
     <!-- responsive style -->
     <link href="{% static 'css/responsive.css' %}" rel="stylesheet"/>
-    
+
 
 </head>
 
 <body>
-    <!-- header section strats -->
-    <header class="header_section">
-        <div class="header_top">
-            <div class="container-fluid header_top_container">
-                <div class="lang_box dropdown">
-                    <a href="#" title="Language" class="nav-link" data-toggle="dropdown" aria-expanded="true">
-                        <img src="{% static 'images/flag-uk.png' %}" alt="flag" class=" " title="United Kingdom"> <i
-                            class="fa fa-angle-down " aria-hidden="true"></i>
+<!-- header section strats -->
+<header class="header_section">
+    <div class="header_top">
+        <div class="container-fluid header_top_container">
+            <div class="lang_box dropdown">
+                <a href="#" title="Language" class="nav-link" data-toggle="dropdown" aria-expanded="true">
+                    <img src="{% static 'images/flag-uk.png' %}" alt="flag" class=" " title="United Kingdom"> <i
+                        class="fa fa-angle-down " aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu ">
+                    <a href="#" class="dropdown-item">
+                        <img src="{% static 'images/flag-france.png' %}" class="" alt="flag">
                     </a>
-                    <div class="dropdown-menu ">
-                        <a href="#" class="dropdown-item">
-                            <img src="{% static 'images/flag-france.png' %}" class="" alt="flag">
-                        </a>
-                    </div>
-                    <span>
+                </div>
+                <span>
               English
             </span>
-                </div>
-                <div class="contact_nav">
-                    <a href="">
-                        <i class="fa fa-phone" aria-hidden="true"></i>
-                        <span>
-                Call : +01 123455678990
-              </span>
-                    </a>
-                    <a href="">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                        <span>
-                Email : demo@gmail.com
-              </span>
-                    </a>
-                    <a href="">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <span>
-                Location
-              </span>
-                    </a>
-                </div>
-                <div class="social_box">
-                    <a href="">
-                        <i class="fa fa-facebook" aria-hidden="true"></i>
-                    </a>
-                    <a href="">
-                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                    </a>
-                    <a href="">
-                        <i class="fa fa-linkedin" aria-hidden="true"></i>
-                    </a>
-                    <a href="">
-                        <i class="fa fa-instagram" aria-hidden="true"></i>
-                    </a>
-                </div>
             </div>
-        </div>
-        <div class="header_bottom">
-            <div class="container-fluid">
-                <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="{% static 'images/logo.png' %}" alt="">
-                    </a>
-                    </a>
-
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class=""> </span>
-                    </button>
-                    
-                    {% include 'common/navigation.html' %}
-                
-                </nav>
-            </div>
-        </div>
-    </header>
-    <!-- end header section -->
-
-    {% block content %}
-    
-    {% endblock %}
-    <!-- info section -->
-    <section class="info_section ">
-    
-        <div class="container">
             <div class="contact_nav">
                 <a href="">
                     <i class="fa fa-phone" aria-hidden="true"></i>
@@ -145,138 +80,235 @@
               </span>
                 </a>
             </div>
-    
-            <div class="info_top ">
-                <div class="row info_main_row">
-                    <div class="col-sm-6 col-md-4 col-lg-3">
-                        <div class="info_links">
-                            <h4>
-                                QUICK LINKS
-                            </h4>
-                            <div class="info_links_menu">
-                                <a class="" href="index.html">Home <span class="sr-only">(current)</span></a>
-                                <a class="" href="../service.html">Services</a>
-                                <a class="" href="../about.html"> About</a>
-                                <a class="" href="../project.html">Project</a>
-                                <a class="" href="../testimonial.html">Testimonial</a>
-                                <a class="" href="../contact.html">Contact Us</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg-3 mx-auto">
-                        <div class="info_post">
-                            <h5>
-                                INSTAGRAM FEEDS
-                            </h5>
-                            <div class="post_box">
-                                <div class="img-box">
-                                    <img src="{% static 'images/instagram.jpg' %}" alt="">
-                                </div>
-                                <div class="img-box">
-                                    <img src="{% static 'images/instagram.jpg' %}" alt="">
-                                </div>
-                                <div class="img-box">
-                                    <img src="{% static 'images/instagram.jpg' %}" alt="">
-                                </div>
-                                <div class="img-box">
-                                    <img src="{% static 'images/instagram.jpg' %}" alt="">
-                                </div>
-                                <div class="img-box">
-                                    <img src="{% static 'images/instagram.jpg' %}" alt="">
-                                </div>
-                                <div class="img-box">
-                                    <img src="{% static 'images/instagram.jpg' %}" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="info_form">
-                            <h4>
-                                SIGN UP TO OUR NEWSLETTER
-                            </h4>
-                            <form action="">
-                                <input type="text" placeholder="Enter Your Email"/>
-                                <button type="submit">
-                                    Subscribe
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="info_bottom">
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="info_logo">
-                            <a href="">
-                                <img src="{% static 'images/logo2.png' %}" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ml-auto">
-                        <div class="social_box">
-                            <a href="">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-linkedin" aria-hidden="true"></i>
-                            </a>
-                            <a href="">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-    
+            <div class="social_box">
+                <a href="">
+                    <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+                <a href="">
+                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                </a>
+                <a href="">
+                    <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </a>
+                <a href="">
+                    <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
-    </section>
-    <!-- end info_section -->
-    
-    
-    <!-- footer section -->
-    <footer class="footer_section">
-        <div class="container">
-            <p>
-                &copy; <span id="displayYear"></span> All Rights Reserved By
-                <a href="https://html.design/">Free Html Templates</a>
-            </p>
-        </div>
-    </footer>
-    <!-- footer section -->
-    
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Bootstrap 5 JavaScript (includes Popper.js functionality) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- jQery -->
-    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
-    
-    <!-- popper js -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <!-- bootstrap js -->
-    <script src="{% static 'js/bootstrap.js' %}"></script>
-    <!-- owl slider -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-    </script>
-    <!--  OwlCarousel 2 - Filter -->
-    <script src="https://huynhhuynh.github.io/owlcarousel2-filter/dist/owlcarousel2-filter.min.js"></script>
-    <!-- custom js -->
-    <script src="{% static 'js/custom.js' %}"></script>
-    <!-- Google Map -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-    </script>
-    <script src="https://kit.fontawesome.com/b22b1b9aa3.js" crossorigin="anonymous"></script>
-    <!-- End Google Map -->
+    </div>
+    <div class="header_bottom">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container ">
+                <a class="navbar-brand" href="index.html">
+                    <img src="{% static 'images/logo.png' %}" alt="">
+                </a>
+                </a>
 
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class=""> </span>
+                </button>
+
+                {% include 'common/navigation.html' %}
+
+            </nav>
+        </div>
+    </div>
+</header>
+<!-- end header section -->
+
+{% block content %}
+
+{% endblock %}
+<!-- info section -->
+<section class="info_section ">
+
+    <div class="container">
+        <div class="contact_nav">
+            <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span>
+                Call : +01 123455678990
+              </span>
+            </a>
+            <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span>
+                Email : demo@gmail.com
+              </span>
+            </a>
+            <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span>
+                Location
+              </span>
+            </a>
+        </div>
+
+        <div class="info_top ">
+            <div class="row info_main_row">
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="info_links">
+                        <h4>
+                            QUICK LINKS
+                        </h4>
+                        <div class="info_links_menu">
+                            <a class="" href="index.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="" href="../service.html">Services</a>
+                            <a class="" href="../about.html"> About</a>
+                            <a class="" href="../project.html">Project</a>
+                            <a class="" href="../testimonial.html">Testimonial</a>
+                            <a class="" href="../contact.html">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3 mx-auto">
+                    <div class="info_post">
+                        <h5>
+                            INSTAGRAM FEEDS
+                        </h5>
+                        <div class="post_box">
+                            <div class="img-box">
+                                <img src="{% static 'images/instagram.jpg' %}" alt="">
+                            </div>
+                            <div class="img-box">
+                                <img src="{% static 'images/instagram.jpg' %}" alt="">
+                            </div>
+                            <div class="img-box">
+                                <img src="{% static 'images/instagram.jpg' %}" alt="">
+                            </div>
+                            <div class="img-box">
+                                <img src="{% static 'images/instagram.jpg' %}" alt="">
+                            </div>
+                            <div class="img-box">
+                                <img src="{% static 'images/instagram.jpg' %}" alt="">
+                            </div>
+                            <div class="img-box">
+                                <img src="{% static 'images/instagram.jpg' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info_form">
+                        <h4>
+                            SIGN UP TO OUR NEWSLETTER
+                        </h4>
+                        <form action="">
+                            <input type="text" placeholder="Enter Your Email"/>
+                            <button type="submit">
+                                Subscribe
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="info_bottom">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="info_logo">
+                        <a href="">
+                            <img src="{% static 'images/logo2.png' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 ml-auto">
+                    <div class="social_box">
+                        <a href="">
+                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-linkedin" aria-hidden="true"></i>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- end info_section -->
+
+
+<!-- footer section -->
+<footer class="footer_section">
+    <div class="container">
+        <p>
+            &copy; <span id="displayYear"></span> All Rights Reserved By
+            <a href="https://html.design/">Free Html Templates</a>
+        </p>
+    </div>
+</footer>
+<!-- footer section -->
+
+
+<!-- jQery -->
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+
+<!-- Bootstrap 5 JavaScript (includes Popper.js functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!-- popper js -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+</script>
+<!-- bootstrap js -->
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<!-- owl slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+</script>
+<!--  OwlCarousel 2 - Filter -->
+<script src="https://huynhhuynh.github.io/owlcarousel2-filter/dist/owlcarousel2-filter.min.js"></script>
+<!-- custom js -->
+<script src="{% static 'js/custom.js' %}"></script>
+<!-- Google Map -->
+
+<script src="https://kit.fontawesome.com/b22b1b9aa3.js" crossorigin="anonymous"></script>
+<!-- End Google Map -->
+
+<script>
+    let autocomplete;
+
+    function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('autocomplete'),
+            { 
+                types: ['geocode'],
+                componentRestrictions: {country: 'BG'} 
+            });
+
+        autocomplete.addListener('place_changed', function () {
+            const place = autocomplete.getPlace();
+
+            if (!place.geometry) {
+                return;
+            }
+
+            const location = place.formatted_address;
+            const lat = place.geometry.location.lat();
+            const lng = place.geometry.location.lng();
+
+            // Update the hidden fields
+            document.getElementById('id_location').value = location;
+            document.getElementById('latitude').value = lat;
+            document.getElementById('longitude').value = lng;
+        });
+    }
+</script>
+
+
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-dbWK3m59cEZE6wgVNUlcaYhhb4y09lc&libraries=places&callback=initAutocomplete">
+</script>
 </body>
 
 </html>

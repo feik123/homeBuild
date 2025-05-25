@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 from homeBuild.accounts.models import JobCategory
+from homeBuild.common.utils import geocode_address
+from homeBuild.jobs.managers import JobManager
 from homeBuild.photos.models import Photo
 
 # Create your models here.
@@ -23,9 +25,19 @@ class Job(models.Model):
         null=True,
         blank=True
     )
-    location = models.CharField(max_length=255)  # ToDo Geolocation
-
+    location = models.CharField(max_length=255,)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     date_of_publication = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+
+        if self.location and (not self.latitude or not self.longitude):
+            self.latitude, self.longitude = geocode_address(self.location)
+
+        super().save(*args, **kwargs)
+
+    objects = JobManager()
 
     def __str__(self):
         return self.title
