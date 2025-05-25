@@ -13,6 +13,7 @@ import os
 import json
 from email.policy import default
 from pathlib import Path
+
 from decouple import config, Config
 
 
@@ -170,3 +171,4 @@ LOGOUT_REDIRECT_URL = reverse_lazy('login')
 LOGIN_URL = reverse_lazy('login')
 
 OPENCAGE_API_KEY = config('OPENCAGE_API_KEY')
+GOOGLE_MAPS_API_KEY = config('GOOGLE_MAPS_API_KEY')

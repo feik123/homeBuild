@@ -6,6 +6,7 @@ from django.views.generic import ListView, CreateView
 
 from rest_framework.views import APIView, Response
 
+from homeBuild import settings
 from homeBuild.jobs.forms import JobAddForm
 from homeBuild.jobs.models import Job, JobPhoto
 from homeBuild.jobs.serializers import JobSerializer
@@ -16,6 +17,11 @@ class CreateJobView(CreateView):
     form_class = JobAddForm
     template_name = 'jobs/create.html'
     success_url = reverse_lazy('job-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['google_maps_api_key'] = settings.GOOGLE_MAPS_API_KEY
+        return context
 
     def get_profile_type(self):
         return self.request.user.profile_type
