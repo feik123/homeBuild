@@ -305,6 +305,30 @@
     }
 </script>
 
+<script>
+    function searchJobs(event) {
+    event.preventDefault();
+
+    const location = document.getElementById('locationInput').value;
+    const radius = document.getElementById('radiusInput').value;
+
+    const url = `/api/jobs/nearby/?location=${encodeURIComponent(location)}&radius=${radius}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById("jobResults");
+            container.innerHTML = "";
+            data.forEach(job => {
+                const div = document.createElement("div");
+                div.innerHTML = `<strong>${job.title}</strong> (${job.distance} km away)<br>${job.location}<hr>`;
+                container.appendChild(div);
+            });
+        })
+        .catch(error => console.error("Error:", error));
+}
+
+</script>
 
 <script async
     src="https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}=places&callback=initAutocomplete">

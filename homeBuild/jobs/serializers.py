@@ -5,10 +5,12 @@ from homeBuild.jobs.models import Job
 
 
 class JobSerializer(serializers.ModelSerializer):
+    distance = serializers.SerializerMethodField()
+
     class Meta:
         model = Job
-        fields = ['homeowner', 'title','description','job_category','location','latitude','longitude']
-        read_only_fields = ['latitude', 'longitude']
+        fields = ['homeowner', 'title','description','job_category','location','latitude','longitude', 'distance']
+        read_only_fields = ['latitude', 'longitude', 'distance']
 
     def set_coordinates(self, validated_data):
         if 'location' in validated_data:
@@ -27,4 +29,6 @@ class JobSerializer(serializers.ModelSerializer):
         self.set_coordinates(validated_data)
         return super().update(instance, validated_data)
 
+    def get_distance(self, obj):
+        return getattr(self, 'distance', None)
 

@@ -1,0 +1,11 @@
+{% extends 'common/base.html' %}
+{% block content %}
+    <div id="jobResults" class="container mt-5">
+        <h2>Search jobs</h2>
+        <form id="jobSearchForm" onsubmit="searchJobs(event)">
+            <input type="text" id="locationInput" placeholder="Enter location" required>
+            <input type="number" id="radiusInput" placeholder="Distance (km)" min="1" value="30">
+            <button type="submit">Search Jobs</button>
+        </form>
+    </div >
+{% endblock %}

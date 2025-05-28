@@ -3,10 +3,13 @@ from http.client import responses
 from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
+from rest_framework import status
+from rest_framework.exceptions import ValidationError
+from rest_framework.generics import ListAPIView
 
-from rest_framework.views import APIView, Response
+from rest_framework.views import Response
 
-from homeBuild import settings
+from homeBuild.common.utils import geocode_address
 from homeBuild.jobs.forms import JobAddForm
 from homeBuild.jobs.models import Job, JobPhoto
 from homeBuild.jobs.serializers import JobSerializer
@@ -17,11 +20,6 @@ class CreateJobView(CreateView):
     form_class = JobAddForm
     template_name = 'jobs/create.html'
     success_url = reverse_lazy('job-list')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['google_maps_api_key'] = settings.GOOGLE_MAPS_API_KEY
-        return context
 
     def get_profile_type(self):
         return self.request.user.profile_type
@@ -60,19 +58,22 @@ class JobListView(ListView):
         return  queryset
 
 
-class NearbyJobsView(APIView):
-    def get(self, request):
-        try:
-            lat = float(request.GET.get('lat'))
-            lon = float(request.GET.get('lon'))
-        except (TypeError, ValueError):
-            return Response({'error': 'Invalid or missing latitude/longitude'}, status=400)
+class NearbyJobsView(ListAPIView):
+    serializer_class = JobSerializer
 
-        try:
-            radius_km = float(request.GET.get('radius', 30))
-        except ValueError:
-            radius_km = 30
+    def get_queryset(self):
+        location = self.request.GET.get('location')
+        radius = float(self.request.GET.get('radius', 30))
 
-        jobs = Job.objects.nearby(lat, lon, radius_km)
-        serializer = JobSerializer(jobs, many=True)
-        return Response(serializer.data)
+        if not location:
+            raise ValidationError(
+                {'location': 'This field is required.'}
+            )
+
+        lat, lon = geocode_address(location)
+        if lat is None or lon is None:
+            raise ValidationError(
+                {'location': 'Invalid location.'}
+            )
+
+        return Job.objects.nearby(lat, lon, radius)
